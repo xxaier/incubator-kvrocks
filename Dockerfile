@@ -62,4 +62,4 @@ COPY ./licenses ./licenses
 COPY ./kvrocks.conf /var/lib/kvrocks/
 EXPOSE 6666:6666
 
-ENTRYPOINT ["./run.sh","./bin/kvrocks", "-c", "/var/lib/kvrocks/kvrocks.conf", "--dir", "/var/lib/kvrocks", "--pidfile", "/var/run/kvrocks/kvrocks.pid"]
+ENTRYPOINT ["./run.sh"]

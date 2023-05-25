@@ -17,28 +17,5 @@
 # specific language governing permissions and limitations
 # under the License.
 
-CONF=${CONF:-/var/lib/kvrocks/kvrocks.conf}
-
-escape() {
-  printf '%s\n' "$@" | sed 's/[][()*\.]/\\&/g'
-}
-
-conf() {
-  echo $@
-  key=$(escape $1)
-  val=$(escape $2)
-  sed -i -e "s/^$key .*/$key $val/" $CONF
-}
-
-env | while IFS='=' read -r name value; do
-  case "$name" in
-  KVROCKS_*)
-    key=$(echo ${name#KVROCKS_} | tr '[:upper:]' '[:lower:]')
-    key=$(echo "$key" | sed 's/__/\./g')
-    conf $key $value
-    ;;
-  esac
-done
-
-echo "> $@"
-exec $@
+set -ex
+exec ./bin/kvrocks -c /var/lib/kvrocks/kvrocks.conf --dir /var/lib/kvrocks --pidfile /var/run/kvrocks/kvrocks.pid $@ $KVROCKS_ARGS
