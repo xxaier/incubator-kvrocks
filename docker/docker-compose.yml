@@ -1,7 +1,7 @@
 version: '3'
 services:
   kvrocks:
-    image: apache/kvrocks:nightly
+    image: kvrocks:nightly
     restart: always
     container_name: kvrocks
     mem_limit: 2G
