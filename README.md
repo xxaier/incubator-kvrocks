@@ -103,6 +103,18 @@ $ docker run -it -p 6666:6666 apache/kvrocks
 $ docker run -it -p 6666:6666 apache/kvrocks:nightly
 ```
 
+The configuration file in docker can be modified through environment variables, such as
+
+```
+KVROCKS_rocksdb__read_options__async_io=yes docker run -it -p 6666:6666 apache/kvrocks:nightly
+```
+
+In this way, docker can modify the configuration file set `rocksdb.read_options.async_io yes` .
+
+Environment variables start with `KVROCKS_` and `__` with replace into `.` .
+
+See [docker/docker-compose.yml](./docker/docker-compose.yml) for more .
+
 ### Connect Kvrocks service
 
 ```
